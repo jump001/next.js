@@ -1,16 +1,11 @@
-import React, { ReactElement } from "react";
-
-import { makeStyles } from "@mui/material/styles";
+import React from "react";
 import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import { TextField } from "formik-material-ui";
 import { Formik, Form, Field, FormikProps } from "formik";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import { Box } from "@mui/material";
 
 
@@ -56,7 +51,7 @@ export default function register({}: Props) {
           fullWidth
           size="small"
           color="primary"
-          onClick={() => Router.push("/")}
+          onClick={() => Router.push("/login")}
         >
           Cancel
         </Button>
