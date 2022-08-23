@@ -25,10 +25,14 @@ interface UserState {
   const userSlice = createSlice({
     name: "user",
     initialState: initialState,
-    reducers: {},
+    reducers: {
+      resetUsername:(state,action:any)=>{
+        state.username="";
+      },
+    },
     extraReducers: (builder) => {},
   });
-
+export const {resetUsername} =userSlice.actions;
 // export common user selector
   export const userSelector = (store: RootState) => store.user;
   // // export reducer
