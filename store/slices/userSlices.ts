@@ -21,12 +21,14 @@ interface UserState {
     user: undefined,
   };
 
-
+interface singleProp{
+  newUsername:string;
+}
   const userSlice = createSlice({
     name: "user",
     initialState: initialState,
     reducers: {
-      resetUsername:(state,action:any)=>{
+      resetUsername:(state,action:PayloadAction<singleProp>)=>{
         state.username= action.payload.newUsername;
       },
     },
