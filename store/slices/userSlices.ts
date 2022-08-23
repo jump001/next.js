@@ -27,7 +27,7 @@ interface UserState {
     initialState: initialState,
     reducers: {
       resetUsername:(state,action:any)=>{
-        state.username="";
+        state.username= action.payload.newUsername;
       },
     },
     extraReducers: (builder) => {},

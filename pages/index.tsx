@@ -13,7 +13,7 @@ export default function index({}: Props) {
   return (
     <Layout>
       <div>jump{user.username}</div>
-      <button onClick={()=>dispatch(resetUsername({}))}>reset</button>
+      <button onClick={()=>dispatch(resetUsername({newUsername:"jjjj"}))}>reset</button>
       </Layout>
   )
 }
