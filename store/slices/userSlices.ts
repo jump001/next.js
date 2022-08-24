@@ -57,7 +57,9 @@ export const signIn = createAsyncThunk(
     },
     extraReducers: (builder) => {
       builder.addCase(signUp.fulfilled, (state, action) => {
-        state.username = action.payload.result;
+        state.accessToken = "";
+        state.user = undefined;
+        state.isAuthenticated = false;
       });
       builder.addCase(signIn.fulfilled, (state, action: any) => {
         state.username = action.payload.result;
