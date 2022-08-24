@@ -2,6 +2,8 @@ import { UserData } from "@/models/user.model";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import * as serverService from "@/services/serverServices";
+import httpClient from "@/utils/httpClient";
+import { AxiosRequestConfig } from "axios";
 
 interface UserState {
     username: string;
@@ -40,10 +42,20 @@ export const signUp = createAsyncThunk(
 export const signIn = createAsyncThunk(
   "user/signin",
   async (credential: SignAction) => {
-    const p1 = new Promise((res) =>
-      setTimeout(() => res({ result: "singin success" }), 3000)
-    );
-    return await p1;
+    const response = await serverService.signIn(credential);
+    if (response.result != "ok") {
+      throw new Error("login failed");
+    }
+
+    // set access token
+    httpClient.interceptors.request.use((config?: AxiosRequestConfig) => {
+      if (config && config.headers) {
+        config.headers["Authorization"] = `Bearer ${response.token}`;
+      }
+
+      return config;
+    });
+    return response;
   }
 );
 
