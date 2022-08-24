@@ -16,7 +16,7 @@ interface UserState {
 
 
   const initialState: UserState = {
-    username: "jirasak keawdham",
+    username: "",
     accessToken: "",
     isAuthenticated: false,
     isAuthenticating: true,
@@ -73,8 +73,17 @@ export const signIn = createAsyncThunk(
         state.user = undefined;
         state.isAuthenticated = false;
       });
-      builder.addCase(signIn.fulfilled, (state, action: any) => {
-        state.username = action.payload.result;
+      builder.addCase(signIn.fulfilled, (state, action) => {
+        state.accessToken = action.payload.token;
+        state.isAuthenticated = true;
+        state.isAuthenticating = false;
+        state.user = action.payload.user;
+      });
+      builder.addCase(signIn.rejected, (state, action) => {
+        state.accessToken = "";
+        state.isAuthenticated = false;
+        state.isAuthenticating = false;
+        state.user = undefined;
       });
     },
   });
