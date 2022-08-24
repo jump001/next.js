@@ -1,6 +1,7 @@
 
 import { SignUp } from "@/models/auth.model";
 import { UserData } from "@/models/user.model";
+import httpClient from "@/utils/httpClient";
 import axios from "axios";
 
 type signProps = {
@@ -17,9 +18,8 @@ type signProps = {
 // };
 
 export const signUp = async (user: signProps): Promise<SignUp> => {
-  const response = await axios.post<SignUp>(
-    "http://localhost:8085/api/v2/authen/register",user
+  const response = await httpClient.post<SignUp>(
+    "/authen/register",user
   );
-
   return response.data;
 };

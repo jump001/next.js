@@ -9,6 +9,7 @@ import Router from "next/router";
 import { Box } from "@mui/material";
 import { useAppDispatch } from "@/store/store";
 import {signUp} from "@/store/slices/userSlices"
+import router from "next/router";
 
 type Props = {};
 
@@ -83,8 +84,12 @@ export default function register({}: Props) {
             <Formik
               initialValues={{ username: "", password: "" }}
               onSubmit={async (values) => {
-               // alert(JSON.stringify(values));
-               dispatch(signUp(values))
+                const response = await dispatch(signUp(values));
+                if (response.meta.requestStatus === "rejected") {
+                  alert("Register failed");
+                } else {
+                  router.push("/login");
+                }
               }}
             >
               {(props) => showForm(props)}
